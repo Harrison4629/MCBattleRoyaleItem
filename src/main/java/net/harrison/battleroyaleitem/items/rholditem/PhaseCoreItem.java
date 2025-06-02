@@ -20,7 +20,7 @@ public class PhaseCoreItem extends AbsRHoldItem {
     private static final int USE_DURATION = 10;
     private static final int COOLDOWN_TICKS = 100;
     private static final int TRACE_BACK_TIME = 100;
-    public static final float PHASE_SPEED = 0.1f;
+    public static final float PHASE_SPEED = 0.3f;
 
     public static final Map<UUID, PhaseData> DATA = new HashMap<>();
 

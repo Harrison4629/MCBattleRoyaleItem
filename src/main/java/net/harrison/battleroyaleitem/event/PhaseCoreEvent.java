@@ -2,6 +2,7 @@ package net.harrison.battleroyaleitem.event;
 
 import net.harrison.battleroyaleitem.items.rholditem.PhaseCoreItem;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -14,7 +15,7 @@ public class PhaseCoreEvent {
 
     @SubscribeEvent
     public static void onServerLevelTick(TickEvent.LevelTickEvent event) {
-        if (event.phase == TickEvent.Phase.END && !event.level.isClientSide) {
+        if (event.phase == TickEvent.Phase.END && !event.level.isClientSide && event.level.dimension() == Level.OVERWORLD) {
             if (!PhaseCoreItem.DATA.isEmpty()) {
                 for (UUID playerId : PhaseCoreItem.DATA.keySet()) {
                     ServerPlayer player = event.level.getServer().getPlayerList().getPlayer(playerId);
@@ -35,8 +36,6 @@ public class PhaseCoreEvent {
         double dy = PhaseCoreItem.DATA.get(playerId).readDirection().y*speed;
         double dz = PhaseCoreItem.DATA.get(playerId).readDirection().z*speed;
         int timeRemaining = PhaseCoreItem.DATA.get(playerId).readRemainingTick();
-        System.out.println(timeRemaining);
-        System.out.println("-------");
 
         if (phaseFinished(playerId)) {
             player.moveTo(PhaseCoreItem.DATA.get(playerId).readOriginPos());
