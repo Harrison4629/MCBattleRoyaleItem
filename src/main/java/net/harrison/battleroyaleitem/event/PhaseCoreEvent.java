@@ -39,7 +39,7 @@ public class PhaseCoreEvent {
 
         UUID playerId = player.getUUID();
 
-        double dx = PhaseCoreItem.DATA.get(playerId).readDirection().x()*speed;
+        double dx = PhaseCoreItem.DATA.get(playerId).readDirection().x*speed;
         double dy = PhaseCoreItem.DATA.get(playerId).readDirection().y*speed;
         double dz = PhaseCoreItem.DATA.get(playerId).readDirection().z*speed;
         int timeRemaining = PhaseCoreItem.DATA.get(playerId).readRemainingTick();

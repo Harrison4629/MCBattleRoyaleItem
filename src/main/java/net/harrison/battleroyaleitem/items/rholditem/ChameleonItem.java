@@ -44,17 +44,17 @@ public class ChameleonItem extends AbsRHoldItem {
 
     @Override
     protected String getFailTranslationKey() {
-        return "";
+        return "item.battleroyaleitem.chameleon.use_fail";
     }
 
     @Override
     protected String getTooltipTranslationKey() {
-        return "";
+        return "item.battleroyaleitem.chameleon.tooltip";
     }
 
     @Override
     protected String getUseTooltipTranslationKey() {
-        return "";
+        return "item.battleroyaleitem.chameleon.tooltip.use";
     }
 
     @Override

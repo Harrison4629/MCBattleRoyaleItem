@@ -1,3 +1,40 @@
 {
+  "item.battleroyaleitem.bandage": "",
+  "item.battleroyaleitem.bandage.tooltip": "",
+  "item.battleroyaleitem.bandage.tooltip.use": "",
+  "item.battleroyaleitem.bandage.use_success": "",
+  "item.battleroyaleitem.bandage.use_fail": "",
 
+  "item.battleroyaleitem.medkit": "",
+  "item.battleroyaleitem.medkit.tooltip": "",
+  "item.battleroyaleitem.medkit.tooltip.use": "",
+  "item.battleroyaleitem.medkit.use_success": "",
+  "item.battleroyaleitem.medkit.use_fail": "",
+
+  "item.battleroyaleitem.chameleon": "",
+  "item.battleroyaleitem.chameleon.tooltip": "",
+  "item.battleroyaleitem.chameleon.tooltip.use": "",
+  "item.battleroyaleitem.chameleon.use_success": "",
+  "item.battleroyaleitem.chameleon.use_fail": "",
+  "item.battleroyaleitem.chameleon.effect_ended": "",
+
+  "item.battleroyaleitem.regeneration_syringe": "",
+  "item.battleroyaleitem.regeneration_syringe.tooltip": "",
+  "item.battleroyaleitem.regeneration_syringe.tooltip.use": "",
+  "item.battleroyaleitem.regeneration_syringe.use_success": "",
+  "item.battleroyaleitem.regeneration_syringe.use_fail": "",
+
+  "item.battleroyaleitem.phase_core": "",
+  "item.battleroyaleitem.phase_core.tooltip": "",
+  "item.battleroyaleitem.phase_core.tooltip.use": "",
+  "item.battleroyaleitem.phase_core.use_success": "",
+  "item.battleroyaleitem.phase_core.use_fail": "",
+  "item.battleroyaleitem.phase_core.trace_back": "",
+
+
+
+  "key.category.battleroyaleitem": "",
+  "key.battleroyaleitem.stop_phasing": "",
+
+  "itemGroup.battleroyaleitemtab": ""
 }

@@ -28,17 +28,17 @@ public class BandageItem extends AbsRHoldItem {
 
     @Override
     protected String getFailTranslationKey() {
-        return "";
+        return "item.battleroyaleitem.bandage.use_fail";
     }
 
     @Override
     protected String getTooltipTranslationKey() {
-        return "";
+        return "item.battleroyaleitem.bandage.tooltip";
     }
 
     @Override
     protected String getUseTooltipTranslationKey() {
-        return "";
+        return "item.battleroyaleitem.bandage.tooltip.use";
     }
 
 }

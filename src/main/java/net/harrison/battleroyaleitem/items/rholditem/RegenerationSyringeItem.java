@@ -34,17 +34,17 @@ public class RegenerationSyringeItem extends AbsRHoldItem {
 
     @Override
     protected String getFailTranslationKey() {
-        return "";
+        return "item.battleroyaleitem.regeneration_syringe.use_fail";
     }
 
     @Override
     protected String getTooltipTranslationKey() {
-        return "";
+        return "item.battleroyaleitem.regeneration_syringe.tooltip";
     }
 
     @Override
     protected String getUseTooltipTranslationKey() {
-        return "";
+        return "item.battleroyaleitem.regeneration_syringe.tooltip.use";
     }
 
     @Override

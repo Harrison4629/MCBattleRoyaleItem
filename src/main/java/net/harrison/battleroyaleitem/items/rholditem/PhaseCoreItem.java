@@ -47,17 +47,17 @@ public class PhaseCoreItem extends AbsRHoldItem {
 
     @Override
     protected String getFailTranslationKey() {
-        return "";
+        return "item.battleroyaleitem.phase_core.use_fail";
     }
 
     @Override
     protected String getTooltipTranslationKey() {
-        return "";
+        return "item.battleroyaleitem.phase_core.tooltip";
     }
 
     @Override
     protected String getUseTooltipTranslationKey() {
-        return "";
+        return "item.battleroyaleitem.phase_core.tooltip.use";
     }
 
     @Override
