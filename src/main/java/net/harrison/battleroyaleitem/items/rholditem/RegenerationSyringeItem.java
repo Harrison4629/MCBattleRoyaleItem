@@ -12,22 +12,24 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-public class RegenerationSyringItem extends AbsRHoldItem {
+public class RegenerationSyringeItem extends AbsRHoldItem {
     private static final int USE_DURATION = 100;
     private static final int REGEN_DURATION = 400;
     private static final int COOLDOWN_TICKS = 200;
 
-    public RegenerationSyringItem(Properties properties) {
+    public RegenerationSyringeItem(Properties properties) {
         super(properties, USE_DURATION, COOLDOWN_TICKS);
     }
 
     @Override
     protected void applyItem(Player player, Level level) {
+        if (!level.isClientSide) {
 
-        player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, REGEN_DURATION, 1, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, REGEN_DURATION, 1, false, false));
 
-        player.displayClientMessage(Component.translatable("item.battleroyaleitem.regeneration_syringe.use_success")
-                .withStyle(ChatFormatting.YELLOW), true);
+            player.displayClientMessage(Component.translatable("item.battleroyaleitem.regeneration_syringe.use_success")
+                    .withStyle(ChatFormatting.YELLOW), true);
+        }
     }
 
     @Override

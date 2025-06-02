@@ -40,7 +40,8 @@ public class Battleroyaleitem {
             event.accept(ModItems.MEDKIT.get());
             event.accept(ModItems.BANDAGE.get());
             event.accept(ModItems.CHAMELEON.get());
-            event.accept(ModItems.REGENERATION_SYRING.get());
+            event.accept(ModItems.REGENERATION_SYRINGE.get());
+            event.accept(ModItems.PHASE_CORE.get());
         }
     }
 

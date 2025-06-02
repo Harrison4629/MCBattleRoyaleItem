@@ -1,31 +1,30 @@
 package net.harrison.battleroyaleitem.items.rholditem;
 
+import net.harrison.battleroyaleitem.capabilities.temporary.PhaseData;
 import net.harrison.battleroyaleitem.items.AbsRHoldItem;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
-public class ChameleonItem extends AbsRHoldItem {
+public class PhaseCoreItem extends AbsRHoldItem {
     private static final int USE_DURATION = 10;
-    private static final int INVISIBILITY_DURATION = 160;
-    private static final int COOLDOWN_TICKS = 140;
+    private static final int COOLDOWN_TICKS = 100;
+    private static final int TRACE_BACK_TIME = 100;
+    public static final float PHASE_SPEED = 0.1f;
 
-    public static final Map<UUID, Integer> INVISIBLE_PLAYERS = new ConcurrentHashMap<>();
+    public static final Map<UUID, PhaseData> DATA = new HashMap<>();
 
-    public ChameleonItem(Properties properties) {
+    public PhaseCoreItem(Properties properties) {
         super(properties, USE_DURATION, COOLDOWN_TICKS);
     }
 
@@ -33,12 +32,15 @@ public class ChameleonItem extends AbsRHoldItem {
     protected void applyItem(Player player, Level level) {
         if (!level.isClientSide) {
 
-            player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, INVISIBILITY_DURATION, 0, false, false));
 
-            INVISIBLE_PLAYERS.put(player.getUUID(), INVISIBILITY_DURATION);
 
-            player.displayClientMessage(Component.translatable("item.battleroyaleitem.chameleon.use_success")
-                    .withStyle(ChatFormatting.GREEN), true);
+            DATA.put(player.getUUID(), new PhaseData(player.getPosition(1.0F),
+                    player.getViewVector(1.0F), TRACE_BACK_TIME));
+
+            player.displayClientMessage(
+                    Component.translatable("item.battleroyaleitem.phase_core.use_success"),
+                    true);
+
         }
     }
 
@@ -58,22 +60,22 @@ public class ChameleonItem extends AbsRHoldItem {
     }
 
     @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.BRUSH;
+    protected SoundEvent getFinishSound() {
+        return SoundEvents.ENDERMAN_TELEPORT;
     }
 
     @Override
     public SoundEvent getUsingSound() {
-        return SoundEvents.PHANTOM_FLAP;
+        return SoundEvents.PORTAL_AMBIENT;
     }
 
     @Override
-    protected SoundEvent getFinishSound() {
-        return SoundEvents.PHANTOM_FLAP;
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.CROSSBOW;
     }
 
     @Override
     protected ParticleOptions getParticleType() {
-        return ParticleTypes.SNOWFLAKE;
+        return ParticleTypes.PORTAL;
     }
 }

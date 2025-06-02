@@ -17,11 +17,13 @@ public class BandageItem extends AbsRHoldItem {
 
     @Override
     protected void applyItem(Player player, Level level) {
+        if (!level.isClientSide) {
 
-        player.heal(HEALING_AMOUNT);
+            player.heal(HEALING_AMOUNT);
 
-        player.displayClientMessage(Component.translatable("item.battleroyaleitem.bandage.use_success")
-                .withStyle(ChatFormatting.GREEN), true);
+            player.displayClientMessage(Component.translatable("item.battleroyaleitem.bandage.use_success")
+                    .withStyle(ChatFormatting.GREEN), true);
+        }
     }
 
     @Override
