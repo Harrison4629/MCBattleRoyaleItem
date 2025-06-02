@@ -19,16 +19,21 @@ public class MedkitItem extends AbsRHoldItem {
     protected void applyItem(Player player, Level level) {
         if (!level.isClientSide) {
 
-            player.heal(HEALING_AMOUNT);
+            if (player.getHealth() < player.getMaxHealth()) {
+                player.heal(HEALING_AMOUNT);
 
-            player.displayClientMessage(Component.translatable("item.battleroyaleitem.medkit.use_success")
-                    .withStyle(ChatFormatting.GREEN), true);
+                player.displayClientMessage(Component.translatable("item.battleroyaleitem.medkit.use_success")
+                        .withStyle(ChatFormatting.GREEN), true);
+            } else {
+                player.displayClientMessage(Component.translatable("item.battleroyaleitem.medkit.use_failure")
+                        .withStyle(ChatFormatting.YELLOW), true);
+            }
         }
     }
 
     @Override
-    protected String getFailTranslationKey() {
-        return "item.battleroyaleitem.medkit.use_fail";
+    protected String getUseTooShortTranslationKey() {
+        return "item.battleroyaleitem.medkit.use_short";
     }
 
     @Override

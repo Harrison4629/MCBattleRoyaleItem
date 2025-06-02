@@ -23,7 +23,7 @@ public class ChameleonEvent {
                 player.removeEffect(MobEffects.INVISIBILITY);
 
                 ChameleonItem.INVISIBLE_PLAYERS.remove(player.getUUID());
-                player.displayClientMessage(Component.translatable("item.battleroyaleitem.chameleon.effect_ended").withStyle(ChatFormatting.RED), true);
+                player.displayClientMessage(Component.translatable("item.battleroyaleitem.chameleon.effect_ended_by_hurt").withStyle(ChatFormatting.RED), true);
 
                 if (player instanceof ServerPlayer serverPlayer) {
                     serverPlayer.playNotifySound(SoundEvents.CAT_HISS, SoundSource.PLAYERS, 0.8F, 1.2F);
@@ -46,10 +46,10 @@ public class ChameleonEvent {
 
                     ChameleonItem.INVISIBLE_PLAYERS.remove(player.getUUID());
 
-                    player.displayClientMessage(Component.translatable("item.battleroyaleitem.chameleon.effect_ended").withStyle(ChatFormatting.RED), true);
+                    player.displayClientMessage(Component.translatable("item.battleroyaleitem.chameleon.effect_ended_by_time").withStyle(ChatFormatting.RED), true);
 
                     if (player instanceof ServerPlayer serverPlayer) {
-                        serverPlayer.playNotifySound(SoundEvents.CAT_HISS, SoundSource.PLAYERS, 0.8F, 1.2F);
+                        serverPlayer.playNotifySound(SoundEvents.CAT_HISS, SoundSource.PLAYERS, 0.6F, 1.2F);
                     }
                 } else {
                     ChameleonItem.INVISIBLE_PLAYERS.put(player.getUUID(), leftTicks);

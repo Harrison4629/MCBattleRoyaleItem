@@ -33,8 +33,8 @@ public class RegenerationSyringeItem extends AbsRHoldItem {
     }
 
     @Override
-    protected String getFailTranslationKey() {
-        return "item.battleroyaleitem.regeneration_syringe.use_fail";
+    protected String getUseTooShortTranslationKey() {
+        return "item.battleroyaleitem.regeneration_syringe.use_short";
     }
 
     @Override

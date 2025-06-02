@@ -47,7 +47,7 @@ public abstract class AbsRHoldItem extends Item {
 
             if (timeUsed < useDuration) {
                 if (!level.isClientSide) {
-                    player.displayClientMessage(Component.translatable(getFailTranslationKey())
+                    player.displayClientMessage(Component.translatable(getUseTooShortTranslationKey())
                             .withStyle(ChatFormatting.RED), true);
                 }
             }
@@ -80,7 +80,7 @@ public abstract class AbsRHoldItem extends Item {
 
     protected abstract void applyItem(Player player, Level level);
 
-    protected abstract String getFailTranslationKey();
+    protected abstract String getUseTooShortTranslationKey();
     protected abstract String getTooltipTranslationKey();
     protected abstract String getUseTooltipTranslationKey();
 

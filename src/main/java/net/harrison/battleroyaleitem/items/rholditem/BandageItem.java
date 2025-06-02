@@ -19,16 +19,22 @@ public class BandageItem extends AbsRHoldItem {
     protected void applyItem(Player player, Level level) {
         if (!level.isClientSide) {
 
-            player.heal(HEALING_AMOUNT);
+            if (player.getHealth() < player.getMaxHealth()) {
 
-            player.displayClientMessage(Component.translatable("item.battleroyaleitem.bandage.use_success")
-                    .withStyle(ChatFormatting.GREEN), true);
+                player.heal(HEALING_AMOUNT);
+
+                player.displayClientMessage(Component.translatable("item.battleroyaleitem.bandage.use_success")
+                        .withStyle(ChatFormatting.GREEN), true);
+            } else {
+                player.displayClientMessage(Component.translatable("item.battleroyaleitem.bandage.use_failure")
+                        .withStyle(ChatFormatting.YELLOW), true);
+            }
         }
     }
 
     @Override
-    protected String getFailTranslationKey() {
-        return "item.battleroyaleitem.bandage.use_fail";
+    protected String getUseTooShortTranslationKey() {
+        return "item.battleroyaleitem.bandage.use_short";
     }
 
     @Override

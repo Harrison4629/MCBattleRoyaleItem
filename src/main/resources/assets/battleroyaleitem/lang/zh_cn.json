@@ -1,7 +1,43 @@
 {
-  "item.battleroyaleitem.bandage": "",
-  "item.battleroyaleitem.medkit": "",
-  "item.battleroyaleitem.chameleon": "",
-  "item.battleroyaleitem.regeneration_syringe": "",
-  "item.battleroyaleitem.phase_core": ""
+  "item.battleroyaleitem.bandage": "绷带",
+  "item.battleroyaleitem.bandage.tooltip": "简单、干净，包住伤口，不包住问题",
+  "item.battleroyaleitem.bandage.tooltip.use": "长按右键回复4点血",
+  "item.battleroyaleitem.bandage.use_success": "你感觉好多了",
+  "item.battleroyaleitem.bandage.use_short": "你感觉好了一瞬间，然后又被现实拉回",
+  "item.battleroyaleitem.bandage.use_failure": "你试图包扎空气，但空气不流血",
+
+  "item.battleroyaleitem.medkit": "医疗包",
+  "item.battleroyaleitem.medkit.tooltip": "全面急救，战场上的第二条命",
+  "item.battleroyaleitem.medkit.tooltip.use": "长按右键回复12点血",
+  "item.battleroyaleitem.medkit.use_success": "你成功使用了医疗包，伤口迅速愈合",
+  "item.battleroyaleitem.medkit.use_short": "治疗效果来得快，去得也快",
+  "item.battleroyaleitem.medkit.use_failure": "医疗包拒绝你的健康申请",
+
+  "item.battleroyaleitem.chameleon": "变色龙之鳞",
+  "item.battleroyaleitem.chameleon.tooltip": "融于环境，静如无声",
+  "item.battleroyaleitem.chameleon.tooltip.use": "长按右键获得隐身8秒，受击后现形",
+  "item.battleroyaleitem.chameleon.use_success": "你进入了隐匿状态，保持安静",
+  "item.battleroyaleitem.chameleon.use_short": "空气说：别抢我饭碗",
+  "item.battleroyaleitem.chameleon.effect_ended_by_hurt": "疼痛让你从潜行中现形",
+  "item.battleroyaleitem.chameleon.effect_ended_by_time": "隐匿状态终止",
+
+  "item.battleroyaleitem.regeneration_syringe": "再生注射器",
+  "item.battleroyaleitem.regeneration_syringe.tooltip": "注入即刻启动细胞再生",
+  "item.battleroyaleitem.regeneration_syringe.tooltip.use": "长按右键获得一级回复效果20秒",
+  "item.battleroyaleitem.regeneration_syringe.use_success": "一股温热的能量在体内蔓延，伤口迅速愈合",
+  "item.battleroyaleitem.regeneration_syringe.use_short": "还没开始回血，效果就结束了",
+
+  "item.battleroyaleitem.phase_core": "位移魔核",
+  "item.battleroyaleitem.phase_core.tooltip": "操控空间扭曲的禁术结晶",
+  "item.battleroyaleitem.phase_core.tooltip.use": "长按右键向目光所视方向位移5秒或按R立即返回",
+  "item.battleroyaleitem.phase_core.use_success": "空间扭曲启动，你向前跃迁！",
+  "item.battleroyaleitem.phase_core.use_short": "原地摇晃了一下，看起来很努力",
+  "item.battleroyaleitem.phase_core.trace_back": "你感到一股力量拉扯着你回到起点",
+
+
+
+  "key.category.battleroyaleitem": "大逃杀模组按键",
+  "key.battleroyaleitem.stop_phasing": "位移魔核回溯原位",
+
+  "itemGroup.battleroyaleitemtab": "大逃杀物品"
 }

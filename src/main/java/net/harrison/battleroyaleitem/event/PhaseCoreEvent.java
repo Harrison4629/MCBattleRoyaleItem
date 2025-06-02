@@ -67,7 +67,6 @@ public class PhaseCoreEvent {
 
         }
 
-
     }
 
     private static boolean phaseFinished(UUID playerId) {

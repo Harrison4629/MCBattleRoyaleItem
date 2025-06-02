@@ -33,8 +33,6 @@ public class PhaseCoreItem extends AbsRHoldItem {
     protected void applyItem(Player player, Level level) {
         if (!level.isClientSide) {
 
-
-
             DATA.put(player.getUUID(), new PhaseData(player.getPosition(1.0F),
                     player.getViewVector(1.0F), TRACE_BACK_TIME));
 
@@ -46,8 +44,8 @@ public class PhaseCoreItem extends AbsRHoldItem {
     }
 
     @Override
-    protected String getFailTranslationKey() {
-        return "item.battleroyaleitem.phase_core.use_fail";
+    protected String getUseTooShortTranslationKey() {
+        return "item.battleroyaleitem.phase_core.use_short";
     }
 
     @Override

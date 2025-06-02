@@ -43,8 +43,8 @@ public class ChameleonItem extends AbsRHoldItem {
     }
 
     @Override
-    protected String getFailTranslationKey() {
-        return "item.battleroyaleitem.chameleon.use_fail";
+    protected String getUseTooShortTranslationKey() {
+        return "item.battleroyaleitem.chameleon.use_short";
     }
 
     @Override
