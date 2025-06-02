@@ -2,6 +2,7 @@ package net.harrison.battleroyaleitem.items.rholditem;
 
 import net.harrison.battleroyaleitem.capabilities.temporary.PhaseData;
 import net.harrison.battleroyaleitem.items.AbsRHoldItem;
+import net.harrison.battleroyaleitem.particle.ParticleSummon;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -74,8 +75,9 @@ public class PhaseCoreItem extends AbsRHoldItem {
         return UseAnim.CROSSBOW;
     }
 
+
     @Override
-    protected ParticleOptions getParticleType() {
-        return ParticleTypes.PORTAL;
+    protected void spawnParticles(Player player, Level level) {
+        ParticleSummon.spawnParticleCircle(level, player.getPosition(1.0F), 1, ParticleTypes.PORTAL, 30);
     }
 }

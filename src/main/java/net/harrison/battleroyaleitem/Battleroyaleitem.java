@@ -2,7 +2,10 @@ package net.harrison.battleroyaleitem;
 
 import net.harrison.battleroyaleitem.init.ModCreativeModeTab;
 import net.harrison.battleroyaleitem.init.ModItems;
+import net.harrison.battleroyaleitem.init.ModKeyBinds;
+import net.harrison.battleroyaleitem.init.ModMessages;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -33,6 +36,8 @@ public class Battleroyaleitem {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+
+        event.enqueueWork(ModMessages::register);
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
@@ -51,6 +56,11 @@ public class Battleroyaleitem {
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
+
+        @SubscribeEvent
+        public static void onKeyRegister(RegisterKeyMappingsEvent event) {
+            event.register(ModKeyBinds.STOP_PHASING);
+        }
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {

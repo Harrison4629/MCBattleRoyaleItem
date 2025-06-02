@@ -1,7 +1,14 @@
 package net.harrison.battleroyaleitem.event;
 
 import net.harrison.battleroyaleitem.items.rholditem.PhaseCoreItem;
+import net.harrison.battleroyaleitem.networking.c2spacket.StopPhasingPacket;
+import net.harrison.battleroyaleitem.particle.ParticleSummon;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,14 +45,26 @@ public class PhaseCoreEvent {
         int timeRemaining = PhaseCoreItem.DATA.get(playerId).readRemainingTick();
 
         if (phaseFinished(playerId)) {
+
+            ParticleSummon.spawnParticleSpiral(player.level, player.getPosition(1.0F), 3, ParticleTypes.PORTAL);
+
             player.moveTo(PhaseCoreItem.DATA.get(playerId).readOriginPos());
+
             PhaseCoreItem.DATA.remove(playerId);
+            StopPhasingPacket.resetKeyPressed(playerId);
+
+            player.displayClientMessage(Component.translatable("item.battleroyaleitem.phase_core.trace_back")
+                    .withStyle(ChatFormatting.BLUE), true);
+            player.level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                    SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 0.8F, 1.0F);
+            ParticleSummon.spawnParticleCircle(player.level, player.getPosition(1.0F), 1, ParticleTypes.PORTAL, 30);
+
         } else {
+            ParticleSummon.teleportEffect(player.level, player.getPosition(1.0F), 1);
             player.moveTo(player.getX() + dx, player.getY() + dy, player.getZ() + dz);
+
             PhaseCoreItem.DATA.get(playerId).modifyRemainingTick(timeRemaining-1);
-            System.out.println("[PhaseCore] Player: " + player.getName().getString() +
-                    ", GameTime: " + player.level.getGameTime() +
-                    ", TicksAfterUpdate: " + PhaseCoreItem.DATA.get(playerId).readRemainingTick());
+
         }
 
 
@@ -54,6 +73,10 @@ public class PhaseCoreEvent {
     private static boolean phaseFinished(UUID playerId) {
         boolean finished = false;
         if (PhaseCoreItem.DATA.get(playerId).readRemainingTick() <=0) {
+            finished = true;
+        }
+
+        if (StopPhasingPacket.isKeyPressed(playerId)) {
             finished = true;
         }
 
