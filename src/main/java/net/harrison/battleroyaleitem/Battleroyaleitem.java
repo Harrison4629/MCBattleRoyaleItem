@@ -1,5 +1,7 @@
 package net.harrison.battleroyaleitem;
 
+import net.harrison.battleroyaleitem.init.ModCreativeModeTab;
+import net.harrison.battleroyaleitem.init.ModItems;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -18,7 +20,7 @@ public class Battleroyaleitem {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 
-
+        ModItems.ITEMS.register(modEventBus);
 
 
 
@@ -34,6 +36,9 @@ public class Battleroyaleitem {
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
+        if (event.getTab() == ModCreativeModeTab.BATTLEROYALEITEMMOD) {
+            event.accept(ModItems.MEDKIT.get());
+        }
     }
 
     @SubscribeEvent
