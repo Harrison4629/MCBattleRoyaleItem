@@ -38,6 +38,9 @@ public class Battleroyaleitem {
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == ModCreativeModeTab.BATTLEROYALEITEMMOD) {
             event.accept(ModItems.MEDKIT.get());
+            event.accept(ModItems.BANDAGE.get());
+            event.accept(ModItems.CHAMELEON.get());
+            event.accept(ModItems.REGENERATION_SYRING.get());
         }
     }
 

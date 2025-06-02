@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = Battleroyaleitem.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class UsingEvent {
+public class RHoldItemUsingEvent {
     private static final Map<UUID, ItemUsingSoundInstance> ACTIVE_SOUNDS = new HashMap<>();
 
     @SubscribeEvent

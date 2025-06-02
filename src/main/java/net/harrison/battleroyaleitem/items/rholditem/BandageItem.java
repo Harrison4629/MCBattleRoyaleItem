@@ -6,12 +6,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-public class MedkitItem extends AbsRHoldItem {
-    private static final int USE_DURATION = 45;
-    private static final int HEALING_AMOUNT = 12;
-    private static final int COOLDOWN_TICKS = 100;
+public class BandageItem extends AbsRHoldItem {
+    private static final int USE_DURATION = 20;
+    private static final int HEALING_AMOUNT = 4;
+    private static final int COOLDOWN_TICKS = 40;
 
-    public MedkitItem(Properties properties) {
+    public BandageItem(Properties properties) {
         super(properties, USE_DURATION, COOLDOWN_TICKS);
     }
 
@@ -20,7 +20,7 @@ public class MedkitItem extends AbsRHoldItem {
 
         player.heal(HEALING_AMOUNT);
 
-        player.displayClientMessage(Component.translatable("item.battleroyaleitem.medkit.use_success")
+        player.displayClientMessage(Component.translatable("item.battleroyaleitem.bandage.use_success")
                 .withStyle(ChatFormatting.GREEN), true);
     }
 
@@ -38,4 +38,5 @@ public class MedkitItem extends AbsRHoldItem {
     protected String getUseTooltipTranslationKey() {
         return "";
     }
+
 }
