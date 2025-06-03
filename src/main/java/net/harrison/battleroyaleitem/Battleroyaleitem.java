@@ -47,6 +47,7 @@ public class Battleroyaleitem {
             event.accept(ModItems.CHAMELEON.get());
             event.accept(ModItems.REGENERATION_SYRINGE.get());
             event.accept(ModItems.PHASE_CORE.get());
+            event.accept(ModItems.BIO_RADAR.get());
         }
     }
 

@@ -1,14 +1,14 @@
 {
   "item.battleroyaleitem.bandage": "绷带",
   "item.battleroyaleitem.bandage.tooltip": "简单、干净，包住伤口，不包住问题",
-  "item.battleroyaleitem.bandage.tooltip.use": "长按右键回复4点血",
+  "item.battleroyaleitem.bandage.tooltip.use": "长按右键回复2♥(4点)血",
   "item.battleroyaleitem.bandage.use_success": "你感觉好多了",
   "item.battleroyaleitem.bandage.use_short": "你感觉好了一瞬间，然后又被现实拉回",
   "item.battleroyaleitem.bandage.use_failure": "你试图包扎空气，但空气不流血",
 
   "item.battleroyaleitem.medkit": "医疗包",
   "item.battleroyaleitem.medkit.tooltip": "全面急救，战场上的第二条命",
-  "item.battleroyaleitem.medkit.tooltip.use": "长按右键回复12点血",
+  "item.battleroyaleitem.medkit.tooltip.use": "长按右键回复6♥(12点)血",
   "item.battleroyaleitem.medkit.use_success": "你成功使用了医疗包，伤口迅速愈合",
   "item.battleroyaleitem.medkit.use_short": "治疗效果来得快，去得也快",
   "item.battleroyaleitem.medkit.use_failure": "医疗包拒绝你的健康申请",
@@ -33,6 +33,13 @@
   "item.battleroyaleitem.phase_core.use_success": "空间扭曲启动，你向前跃迁！",
   "item.battleroyaleitem.phase_core.use_short": "原地摇晃了一下，看起来很努力",
   "item.battleroyaleitem.phase_core.trace_back": "你感到一股力量拉扯着你回到起点",
+
+  "item.battleroyaleitem.bio_radar": "生命雷达",
+  "item.battleroyaleitem.bio_radar.tooltip": "用血肉换取洞察，用痛苦感知生命",
+  "item.battleroyaleitem.bio_radar.tooltip.use": "长按右键以扫描半径80米内的敌人，但受到3♥（6点）伤害",
+  "item.battleroyaleitem.bio_radar.use_success": "雷达灼烧你的神经，感知随之而来，已扫描到的玩家数量: %d",
+  "item.battleroyaleitem.bio_radar.use_short": "雷达宕机了...",
+  "item.battleroyaleitem.bio_radar.use_fail": "你太虚弱了，无法承受雷达反噬",
 
 
 

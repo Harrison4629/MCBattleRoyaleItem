@@ -2,6 +2,7 @@ package net.harrison.battleroyaleitem.init;
 
 import net.harrison.battleroyaleitem.Battleroyaleitem;
 import net.harrison.battleroyaleitem.items.rholditem.*;
+import net.harrison.battleroyaleitem.items.rholditem.bioRadar.BioRadarItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,4 +21,7 @@ public class ModItems {
             () -> new RegenerationSyringeItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> PHASE_CORE = ITEMS.register("phase_core",
             () -> new PhaseCoreItem(new Item.Properties().stacksTo(3)));
+    public static final RegistryObject<Item> BIO_RADAR = ITEMS.register("bio_radar",
+            () -> new BioRadarItem(new Item.Properties().stacksTo(1)));
+
 }

@@ -34,6 +34,13 @@
   "item.battleroyaleitem.phase_core.use_short": "",
   "item.battleroyaleitem.phase_core.trace_back": "",
 
+  "item.battleroyaleitem.bio_radar": "",
+  "item.battleroyaleitem.bio_radar.tooltip": "",
+  "item.battleroyaleitem.bio_radar.tooltip.use": "",
+  "item.battleroyaleitem.bio_radar.use_success": "",
+  "item.battleroyaleitem.bio_radar.use_short": "",
+  "item.battleroyaleitem.bio_radar.use_fail": "",
+
 
 
   "key.category.battleroyaleitem": "",
