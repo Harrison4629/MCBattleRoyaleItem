@@ -1,5 +1,6 @@
 package net.harrison.battleroyaleitem.events;
 
+import net.harrison.battleroyaleitem.Battleroyaleitem;
 import net.harrison.battleroyaleitem.items.rholditem.ChameleonItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -13,7 +14,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = Battleroyaleitem.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ChameleonEvent {
 
     @SubscribeEvent

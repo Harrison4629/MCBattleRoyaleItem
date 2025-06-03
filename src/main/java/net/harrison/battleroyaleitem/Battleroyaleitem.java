@@ -1,10 +1,16 @@
 package net.harrison.battleroyaleitem;
 
+import net.harrison.battleroyaleitem.capabilities.armorplate.NumofArmorPlateProvider;
 import net.harrison.battleroyaleitem.init.*;
+import net.harrison.battleroyaleitem.client.screens.ArmorPlateHudOverlay;
+import net.harrison.battleroyaleitem.networking.s2cpacket.ArmorPlateSyncS2CPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -46,6 +52,7 @@ public class Battleroyaleitem {
             event.accept(ModItems.PHASE_CORE.get());
             event.accept(ModItems.BIO_RADAR.get());
             event.accept(ModItems.LIFT_DEVICE.get());
+            event.accept(ModItems.ARMOR_PLATE.get());
         }
     }
 
@@ -62,7 +69,30 @@ public class Battleroyaleitem {
         }
 
         @SubscribeEvent
+        public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
+            event.registerAboveAll("armor_plate", ArmorPlateHudOverlay.HUD_ARMOR_PLATE);
+        }
+
+
+
+
+        @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
         }
+    }
+
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+    public static class ForgeClientEvents {
+        @SubscribeEvent
+        public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {
+            if (!event.getLevel().isClientSide) {
+                if (event.getEntity() instanceof ServerPlayer player) {
+                    player.getCapability(NumofArmorPlateProvider.NUMOF_ARMOR_PLATE_CAPABILITY).ifPresent(numofArmorPlate -> {
+                        ModMessages.sendToPlayer(new ArmorPlateSyncS2CPacket(numofArmorPlate.getNumofArmorPlate()), player);
+                    });
+                }
+            }
+        }
+
     }
 }

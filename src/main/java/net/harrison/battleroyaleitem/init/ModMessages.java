@@ -1,7 +1,9 @@
 package net.harrison.battleroyaleitem.init;
 
 import net.harrison.battleroyaleitem.Battleroyaleitem;
+import net.harrison.battleroyaleitem.networking.c2spacket.ArmorPlateC2SPacket;
 import net.harrison.battleroyaleitem.networking.c2spacket.StopPhasingPacket;
+import net.harrison.battleroyaleitem.networking.s2cpacket.ArmorPlateSyncS2CPacket;
 import net.harrison.battleroyaleitem.networking.s2cpacket.LiftDevicePacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -41,6 +43,12 @@ public class ModMessages {
                 .consumerMainThread(StopPhasingPacket::handle)
                 .add();
 
+        net.messageBuilder(ArmorPlateC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(ArmorPlateC2SPacket::new)
+                .encoder(ArmorPlateC2SPacket::toBytes)
+                .consumerMainThread(ArmorPlateC2SPacket::handle)
+                .add();
+
     }
 
     private static void registerS2CPackets(SimpleChannel net) {
@@ -50,6 +58,11 @@ public class ModMessages {
                 .consumerMainThread(LiftDevicePacket::handle)
                 .add();
 
+        net.messageBuilder(ArmorPlateSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(ArmorPlateSyncS2CPacket::new)
+                .encoder(ArmorPlateSyncS2CPacket::toBytes)
+                .consumerMainThread(ArmorPlateSyncS2CPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) {

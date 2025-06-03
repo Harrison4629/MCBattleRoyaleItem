@@ -34,11 +34,9 @@ public class StopPhasingPacket {
     public void handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
-            // 获取发送数据包的玩家
             ServerPlayer player = context.getSender();
             if (player != null) {
                 UUID playerId = player.getUUID();
-                // 仅当玩家正在位移时记录按键状态
                 if (PhaseData.DATA.get(playerId) != null) {
                     KEY_PRESSED_MAP.put(playerId, true);
                 }

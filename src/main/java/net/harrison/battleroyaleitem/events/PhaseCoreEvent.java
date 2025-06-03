@@ -1,5 +1,6 @@
 package net.harrison.battleroyaleitem.events;
 
+import net.harrison.battleroyaleitem.Battleroyaleitem;
 import net.harrison.battleroyaleitem.capabilities.temporary.PhaseData;
 import net.harrison.battleroyaleitem.items.rholditem.PhaseCoreItem;
 import net.harrison.battleroyaleitem.networking.c2spacket.StopPhasingPacket;
@@ -17,7 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.UUID;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = Battleroyaleitem.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PhaseCoreEvent {
     private static final float speed = PhaseCoreItem.PHASE_SPEED;
 

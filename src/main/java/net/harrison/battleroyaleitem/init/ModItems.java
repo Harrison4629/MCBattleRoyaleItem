@@ -26,5 +26,7 @@ public class ModItems {
             () -> new BioRadarItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> LIFT_DEVICE = ITEMS.register("lift_device",
             () -> new LiftDeviceItem(ModEntities.LIFTDEVICE, new Item.Properties().stacksTo(2)));
+    public static final RegistryObject<Item> ARMOR_PLATE = ITEMS.register("armor_plate",
+            () -> new ArmorPlateItem(new Item.Properties().stacksTo(3)));
 
 }
