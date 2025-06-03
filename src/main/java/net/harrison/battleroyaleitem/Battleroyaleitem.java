@@ -1,9 +1,6 @@
 package net.harrison.battleroyaleitem;
 
-import net.harrison.battleroyaleitem.init.ModCreativeModeTab;
-import net.harrison.battleroyaleitem.init.ModItems;
-import net.harrison.battleroyaleitem.init.ModKeyBinds;
-import net.harrison.battleroyaleitem.init.ModMessages;
+import net.harrison.battleroyaleitem.init.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,7 +21,7 @@ public class Battleroyaleitem {
 
 
         ModItems.ITEMS.register(modEventBus);
-
+        ModEntities.register(modEventBus);
 
 
 
@@ -48,6 +45,7 @@ public class Battleroyaleitem {
             event.accept(ModItems.REGENERATION_SYRINGE.get());
             event.accept(ModItems.PHASE_CORE.get());
             event.accept(ModItems.BIO_RADAR.get());
+            event.accept(ModItems.LIFT_DEVICE.get());
         }
     }
 

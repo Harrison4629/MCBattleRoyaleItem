@@ -2,8 +2,7 @@ package net.harrison.battleroyaleitem.items.rholditem;
 
 import net.harrison.battleroyaleitem.capabilities.temporary.PhaseData;
 import net.harrison.battleroyaleitem.items.AbsRHoldItem;
-import net.harrison.battleroyaleitem.particle.ParticleSummon;
-import net.minecraft.core.particles.ParticleOptions;
+import net.harrison.battleroyaleitem.particles.ParticleSummon;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;

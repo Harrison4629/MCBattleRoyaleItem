@@ -41,6 +41,10 @@
   "item.battleroyaleitem.bio_radar.use_short": "",
   "item.battleroyaleitem.bio_radar.use_fail": "",
 
+  "item.battleroyaleitem.lift_device": "",
+  "item.battleroyaleitem.lift_device.tooltip": "",
+  "item.battleroyaleitem.lift_device.tooltip.use": "",
+
 
 
   "key.category.battleroyaleitem": "",

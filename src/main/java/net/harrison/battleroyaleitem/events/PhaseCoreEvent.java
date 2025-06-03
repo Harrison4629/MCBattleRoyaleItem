@@ -1,8 +1,8 @@
-package net.harrison.battleroyaleitem.event;
+package net.harrison.battleroyaleitem.events;
 
 import net.harrison.battleroyaleitem.items.rholditem.PhaseCoreItem;
 import net.harrison.battleroyaleitem.networking.c2spacket.StopPhasingPacket;
-import net.harrison.battleroyaleitem.particle.ParticleSummon;
+import net.harrison.battleroyaleitem.particles.ParticleSummon;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -60,7 +60,9 @@ public class PhaseCoreEvent {
             ParticleSummon.spawnParticleCircle(player.level, player.getPosition(1.0F), 1, ParticleTypes.PORTAL, 30);
 
         } else {
-            ParticleSummon.teleportEffect(player.level, player.getPosition(1.0F), 1);
+            if (timeRemaining %3 == 0) {
+                ParticleSummon.teleportEffect(player.level, player.getPosition(1.0F), 5);
+            }
             player.moveTo(player.getX() + dx, player.getY() + dy, player.getZ() + dz);
 
             PhaseCoreItem.DATA.get(playerId).modifyRemainingTick(timeRemaining-1);

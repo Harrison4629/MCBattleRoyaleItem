@@ -1,4 +1,4 @@
-package net.harrison.battleroyaleitem.particle;
+package net.harrison.battleroyaleitem.particles;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleOptions;

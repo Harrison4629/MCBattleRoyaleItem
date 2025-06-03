@@ -2,6 +2,7 @@ package net.harrison.battleroyaleitem.init;
 
 import net.harrison.battleroyaleitem.Battleroyaleitem;
 import net.harrison.battleroyaleitem.networking.c2spacket.StopPhasingPacket;
+import net.harrison.battleroyaleitem.networking.s2cpacket.LiftDevicePacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -43,6 +44,11 @@ public class ModMessages {
     }
 
     private static void registerS2CPackets(SimpleChannel net) {
+        net.messageBuilder(LiftDevicePacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(LiftDevicePacket::new)
+                .encoder(LiftDevicePacket::toBytes)
+                .consumerMainThread(LiftDevicePacket::handle)
+                .add();
 
     }
 

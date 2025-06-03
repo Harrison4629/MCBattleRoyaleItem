@@ -1,6 +1,7 @@
 package net.harrison.battleroyaleitem.init;
 
 import net.harrison.battleroyaleitem.Battleroyaleitem;
+import net.harrison.battleroyaleitem.items.placeitem.LiftDeviceItem;
 import net.harrison.battleroyaleitem.items.rholditem.*;
 import net.harrison.battleroyaleitem.items.rholditem.bioRadar.BioRadarItem;
 import net.minecraft.world.item.Item;
@@ -23,5 +24,7 @@ public class ModItems {
             () -> new PhaseCoreItem(new Item.Properties().stacksTo(3)));
     public static final RegistryObject<Item> BIO_RADAR = ITEMS.register("bio_radar",
             () -> new BioRadarItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> LIFT_DEVICE = ITEMS.register("lift_device",
+            () -> new LiftDeviceItem(ModEntities.LIFTDEVICE, new Item.Properties().stacksTo(2)));
 
 }

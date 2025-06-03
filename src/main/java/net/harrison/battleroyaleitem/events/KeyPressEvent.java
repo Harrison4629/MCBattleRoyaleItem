@@ -1,4 +1,4 @@
-package net.harrison.battleroyaleitem.event;
+package net.harrison.battleroyaleitem.events;
 
 import net.harrison.battleroyaleitem.Battleroyaleitem;
 import net.harrison.battleroyaleitem.init.ModKeyBinds;
