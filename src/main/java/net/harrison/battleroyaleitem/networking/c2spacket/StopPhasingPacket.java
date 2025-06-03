@@ -1,5 +1,6 @@
 package net.harrison.battleroyaleitem.networking.c2spacket;
 
+import net.harrison.battleroyaleitem.capabilities.temporary.PhaseData;
 import net.harrison.battleroyaleitem.items.rholditem.PhaseCoreItem;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -38,7 +39,7 @@ public class StopPhasingPacket {
             if (player != null) {
                 UUID playerId = player.getUUID();
                 // 仅当玩家正在位移时记录按键状态
-                if (PhaseCoreItem.DATA.get(playerId) != null) {
+                if (PhaseData.DATA.get(playerId) != null) {
                     KEY_PRESSED_MAP.put(playerId, true);
                 }
             }

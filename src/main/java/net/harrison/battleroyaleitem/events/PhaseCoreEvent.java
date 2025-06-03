@@ -1,5 +1,6 @@
 package net.harrison.battleroyaleitem.events;
 
+import net.harrison.battleroyaleitem.capabilities.temporary.PhaseData;
 import net.harrison.battleroyaleitem.items.rholditem.PhaseCoreItem;
 import net.harrison.battleroyaleitem.networking.c2spacket.StopPhasingPacket;
 import net.harrison.battleroyaleitem.particles.ParticleSummon;
@@ -23,8 +24,8 @@ public class PhaseCoreEvent {
     @SubscribeEvent
     public static void onServerLevelTick(TickEvent.LevelTickEvent event) {
         if (event.phase == TickEvent.Phase.END && !event.level.isClientSide && event.level.dimension() == Level.OVERWORLD) {
-            if (!PhaseCoreItem.DATA.isEmpty()) {
-                for (UUID playerId : PhaseCoreItem.DATA.keySet()) {
+            if (!PhaseData.DATA.isEmpty()) {
+                for (UUID playerId : PhaseData.DATA.keySet()) {
                     ServerPlayer player = event.level.getServer().getPlayerList().getPlayer(playerId);
                     if (player != null) {
                         updatePhasing(player);
@@ -39,18 +40,18 @@ public class PhaseCoreEvent {
 
         UUID playerId = player.getUUID();
 
-        double dx = PhaseCoreItem.DATA.get(playerId).readDirection().x*speed;
-        double dy = PhaseCoreItem.DATA.get(playerId).readDirection().y*speed;
-        double dz = PhaseCoreItem.DATA.get(playerId).readDirection().z*speed;
-        int timeRemaining = PhaseCoreItem.DATA.get(playerId).readRemainingTick();
+        double dx = PhaseData.DATA.get(playerId).readDirection().x*speed;
+        double dy = PhaseData.DATA.get(playerId).readDirection().y*speed;
+        double dz = PhaseData.DATA.get(playerId).readDirection().z*speed;
+        int timeRemaining = PhaseData.DATA.get(playerId).readRemainingTick();
 
         if (phaseFinished(playerId)) {
 
             ParticleSummon.spawnParticleSpiral(player.level, player.getPosition(1.0F), 3, ParticleTypes.PORTAL);
 
-            player.moveTo(PhaseCoreItem.DATA.get(playerId).readOriginPos());
+            player.moveTo(PhaseData.DATA.get(playerId).readOriginPos());
 
-            PhaseCoreItem.DATA.remove(playerId);
+            PhaseData.DATA.remove(playerId);
             StopPhasingPacket.resetKeyPressed(playerId);
 
             player.displayClientMessage(Component.translatable("item.battleroyaleitem.phase_core.trace_back")
@@ -60,12 +61,12 @@ public class PhaseCoreEvent {
             ParticleSummon.spawnParticleCircle(player.level, player.getPosition(1.0F), 1, ParticleTypes.PORTAL, 30);
 
         } else {
-            if (timeRemaining %3 == 0) {
+            if (timeRemaining %5 == 0) {
                 ParticleSummon.teleportEffect(player.level, player.getPosition(1.0F), 5);
             }
             player.moveTo(player.getX() + dx, player.getY() + dy, player.getZ() + dz);
 
-            PhaseCoreItem.DATA.get(playerId).modifyRemainingTick(timeRemaining-1);
+            PhaseData.DATA.get(playerId).modifyRemainingTick(timeRemaining-1);
 
         }
 
@@ -73,7 +74,7 @@ public class PhaseCoreEvent {
 
     private static boolean phaseFinished(UUID playerId) {
         boolean finished = false;
-        if (PhaseCoreItem.DATA.get(playerId).readRemainingTick() <=0) {
+        if (PhaseData.DATA.get(playerId).readRemainingTick() <=0) {
             finished = true;
         }
 

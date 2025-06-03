@@ -22,7 +22,6 @@ public class PhaseCoreItem extends AbsRHoldItem {
     private static final int TRACE_BACK_TIME = 100;
     public static final float PHASE_SPEED = 0.3f;
 
-    public static final Map<UUID, PhaseData> DATA = new HashMap<>();
 
     public PhaseCoreItem(Properties properties) {
         super(properties, USE_DURATION, COOLDOWN_TICKS);
@@ -32,7 +31,7 @@ public class PhaseCoreItem extends AbsRHoldItem {
     protected void applyItem(Player player, Level level) {
         if (!level.isClientSide) {
 
-            DATA.put(player.getUUID(), new PhaseData(player.getPosition(1.0F),
+            PhaseData.DATA.put(player.getUUID(), new PhaseData(player.getPosition(1.0F),
                     player.getViewVector(1.0F), TRACE_BACK_TIME));
 
             player.displayClientMessage(

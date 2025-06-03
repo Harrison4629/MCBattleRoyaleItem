@@ -2,10 +2,16 @@ package net.harrison.battleroyaleitem.capabilities.temporary;
 
 import net.minecraft.world.phys.Vec3;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public class PhaseData {
     private final Vec3 originPos;
     private final Vec3 direction;
     private int leftTicks;
+
+    public static final Map<UUID, PhaseData> DATA = new HashMap<>();
 
     public PhaseData(Vec3 originPos, Vec3 direction, int leftTicks) {
         this.originPos = originPos;
