@@ -16,7 +16,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public class LiftDeviceEntity extends Entity {
     private static final EntityDataAccessor<Float> HEALTH = SynchedEntityData.defineId(LiftDeviceEntity.class, EntityDataSerializers.FLOAT);
@@ -51,20 +54,19 @@ public class LiftDeviceEntity extends Entity {
         }
 
         if (this.level instanceof ServerLevel level) {
-            for (ServerPlayer player : level.players())
+
+            AABB area = new AABB(this.getX() - 0.5F, this.getY(), this.getZ() - 0.5F,
+                                this.getX() + 0.5F, this.getY() + 5.0F, this.getZ() + 0.5F);
+
+            List<ServerPlayer> playersInArea = level.getEntitiesOfClass(ServerPlayer.class, area, player -> !player.isSpectator());
+            for (ServerPlayer player : playersInArea)
             {
-
-                Vec3 distance = player.position().vectorTo(this.position());
-                Vec3 verdistance = new Vec3(distance.x, 0, distance.z);
-
-
-                if (distance.y>=-5 && distance.y<=0 && verdistance.length()<=0.8 && player.getDeltaMovement().y < 1.2) {
+                if (player.getDeltaMovement().y < 1.2) {
                     Vec3 speed = player.getDeltaMovement();
-                    Vec3 delta = new Vec3(1.8 * speed.x, 1.2, 1.8 * speed.z);
+                    Vec3 delta = new Vec3(1.9 * speed.x, 1.2, 1.9 * speed.z);
                     player.setDeltaMovement(delta);
                     ModMessages.sendToPlayer(new LiftDevicePacket(delta), player);
                     LiftDeviceFallImmuneEvent.setImmune(player.getUUID(), true);
-
                 }
             }
         }
