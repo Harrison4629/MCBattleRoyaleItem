@@ -1,6 +1,9 @@
 package net.harrison.battleroyaleitem.init;
 
 import net.harrison.battleroyaleitem.Battleroyaleitem;
+import net.harrison.battleroyaleitem.entities.airdrop.AirdropEntity;
+import net.harrison.battleroyaleitem.entities.airdrop.AirdropModel;
+import net.harrison.battleroyaleitem.entities.airdrop.AirdropRenderer;
 import net.harrison.battleroyaleitem.entities.liftdevice.LiftDeviceEntity;
 import net.harrison.battleroyaleitem.entities.liftdevice.LiftDeviceModel;
 import net.harrison.battleroyaleitem.entities.liftdevice.LiftDeviceRenderer;
@@ -28,17 +31,29 @@ public class ModEntities {
                     .fireImmune()
                     .build(new ResourceLocation(Battleroyaleitem.MODID, "liftdevice").toString()));
 
+    public static final RegistryObject<EntityType<AirdropEntity>> AIRDROP = ENTITY_TYPES.register("airdrop",
+            () -> EntityType.Builder.of(AirdropEntity::new, MobCategory.MISC)
+                    .sized(2.0F, 2.2F)
+                    .clientTrackingRange(200)
+                    .updateInterval(3)
+                    .fireImmune()
+                    .build(new ResourceLocation(Battleroyaleitem.MODID, "airdrop").toString()));
+
+
+
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(AIRDROP.get(), AirdropRenderer::new);
         event.registerEntityRenderer(LIFTDEVICE.get(), LiftDeviceRenderer::new);
     }
 
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(LiftDeviceModel.LAYER_LOCATION, LiftDeviceModel::createBodyLayer);
+        event.registerLayerDefinition(AirdropModel.LAYER_LOCATION, AirdropModel::createBodyLayer);
     }
 }
