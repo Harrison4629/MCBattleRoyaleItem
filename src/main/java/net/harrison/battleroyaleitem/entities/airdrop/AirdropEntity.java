@@ -1,11 +1,11 @@
 package net.harrison.battleroyaleitem.entities.airdrop;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
@@ -13,6 +13,7 @@ import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -22,11 +23,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 
 public class AirdropEntity extends Entity implements Container, MenuProvider{
     private final NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
+
+    private static final double FALL_SPEED = -0.05D; // 负值表示向下，可以调整这个值来控制速度
+    private static final double TERMINAL_VELOCITY = -0.2D; // 终端速度，防止无限加速
 
     private final float AIRDROP_LUCKY_VALUE = 1.0F;
 
@@ -37,6 +42,50 @@ public class AirdropEntity extends Entity implements Container, MenuProvider{
         super(pEntityType, pLevel);
         this.blocksBuilding = true;
         this.noPhysics = false;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (this.level.isClientSide) {
+            this.level.addParticle(ParticleTypes.CLOUD, this.getX() + this.random.nextDouble() * 0.5D - 0.25D,
+                    this.getY() +2.5D + this.random.nextDouble() * 0.5D,
+                    this.getZ() + this.random.nextDouble() * 0.5D - 0.25D,
+                    0.0D, 0.01D, 0.0D);
+            this.level.addParticle(ParticleTypes.CLOUD, this.getX() + this.random.nextDouble() * 0.3D - 0.15D,
+                    this.getY() +3.0D + this.random.nextDouble() * 0.5D,
+                    this.getZ() + this.random.nextDouble() * 0.3D - 0.15D,
+                    0.0D, 0.05D, 0.0D);
+            this.level.addParticle(ParticleTypes.CLOUD, this.getX() + this.random.nextDouble() * 0.2D - 0.15D,
+                    this.getY() +3.7D + this.random.nextDouble() * 0.5D,
+                    this.getZ() + this.random.nextDouble() * 0.2D - 0.15D,
+                    0.0D, 0.1D, 0.0D);
+
+        }
+
+        Vec3 fall = this.getDeltaMovement();
+        if (this.isOnGround()) {
+            fall = Vec3.ZERO;
+        } else {
+            fall = fall.add(0.0D, FALL_SPEED, 0.0D);
+            if (fall.y < TERMINAL_VELOCITY) {
+                fall = new Vec3(fall.x, TERMINAL_VELOCITY, fall.z);
+            }
+
+            double horizontalDrag = 0.7; // 水平阻力系数，可以根据需要调整，数值越大阻力越小
+            fall = new Vec3(
+                    fall.x * horizontalDrag,
+                    fall.y,
+                    fall.z * horizontalDrag);
+
+            if (Math.abs(fall.x) < 0.003) fall = new Vec3(0, fall.y, fall.z);
+            if (Math.abs(fall.z) < 0.003) fall = new Vec3(fall.x, fall.y, 0);
+        }
+
+        this.setDeltaMovement(fall);
+        this.move(MoverType.SELF, this.getDeltaMovement());
+
     }
 
     @Override
@@ -63,7 +112,7 @@ public class AirdropEntity extends Entity implements Container, MenuProvider{
             }
             pPlayer.openMenu(this);
         }
-        return InteractionResult.sidedSuccess(this.level.isClientSide);
+        return InteractionResult.CONSUME;
     }
 
     public void setLootTable(ResourceLocation lootTable, long lootTableSeed) {
