@@ -58,9 +58,15 @@ public class ArmorPlateItem extends AbsRHoldItem {
                         }
 
                         player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
+
+
                     }
 
                 });
+            }
+
+            if (level.isClientSide) {
+                spawnParticles(player, level);
             }
         }
         return stack;
