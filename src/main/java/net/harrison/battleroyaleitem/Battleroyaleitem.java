@@ -75,24 +75,10 @@ public class Battleroyaleitem {
 
 
 
-
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
         }
     }
 
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-    public static class ForgeClientEvents {
-        @SubscribeEvent
-        public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {
-            if (!event.getLevel().isClientSide) {
-                if (event.getEntity() instanceof ServerPlayer player) {
-                    player.getCapability(NumofArmorPlateProvider.NUMOF_ARMOR_PLATE_CAPABILITY).ifPresent(numofArmorPlate -> {
-                        ModMessages.sendToPlayer(new ArmorPlateSyncS2CPacket(numofArmorPlate.getNumofArmorPlate()), player);
-                    });
-                }
-            }
-        }
 
-    }
 }
