@@ -5,8 +5,11 @@ import net.harrison.battleroyaleitem.capabilities.armorplate.NumofArmorPlate;
 import net.harrison.battleroyaleitem.capabilities.armorplate.NumofArmorPlateProvider;
 import net.harrison.battleroyaleitem.init.ModMessages;
 import net.harrison.battleroyaleitem.networking.s2cpacket.ArmorPlateSyncS2CPacket;
-import net.minecraft.network.chat.Component;
+import net.harrison.battleroyaleitem.particles.ParticleSummon;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.player.Player;
@@ -42,14 +45,15 @@ public class ArmorPlateDamageReductionEvent {
             if (armorPlateCount > 0) {
                 float damage = event.getAmount();
                 numofArmorPlate.subHP(damage);
-
                 event.setCanceled(true);
+
+                if (numofArmorPlate.getNumofArmorPlate() == 0) {
+                    player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SHIELD_BLOCK, SoundSource.PLAYERS,0.8F, 1.0F);
+                    ParticleSummon.explosion(player.level, player.getPosition(1.0F), 5);
+                }
 
             }
             ModMessages.sendToPlayer(new ArmorPlateSyncS2CPacket(numofArmorPlate.getNumofArmorPlate()), (ServerPlayer) player);
         });
-
-
     }
-
 }

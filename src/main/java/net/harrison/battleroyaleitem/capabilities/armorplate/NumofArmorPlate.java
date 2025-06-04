@@ -37,9 +37,13 @@ public class NumofArmorPlate {
             this.ARMOR_PLATE_HP = MAX_HP_PER_ARMOR_PLATE;
         }
         //最后一块护甲板减免一次致命伤害
-        if (excessiveDamage > 0 && this.numofArmorPlate > 1) {
+        if (excessiveDamage > 0 && this.numofArmorPlate > 0) {
             subHP(excessiveDamage);
         }
+    }
+
+    public float getHP() {
+        return this.ARMOR_PLATE_HP;
     }
 
     public void saveNBTData(CompoundTag nbt) {

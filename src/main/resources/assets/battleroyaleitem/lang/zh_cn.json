@@ -40,10 +40,17 @@
   "item.battleroyaleitem.bio_radar.use_success": "雷达灼烧你的神经，感知随之而来，已扫描到的玩家数量: %d",
   "item.battleroyaleitem.bio_radar.use_short": "雷达宕机了...",
   "item.battleroyaleitem.bio_radar.use_fail": "你太虚弱了，无法承受雷达反噬",
+  "item.battleroyaleitem.bio_radar.detected": "你已被生命雷达扫描，请注意敌人的袭击",
 
   "item.battleroyaleitem.lift_device": "飞升装置",
   "item.battleroyaleitem.lift_device.tooltip": "矮人科技·型号A-12：轻便便携式飞升平台",
   "item.battleroyaleitem.lift_device.tooltip.use": "右键往地面放置，站在上方以升空，并获得一次摔落免疫",
+
+  "item.battleroyaleitem.armor_plate": "护甲板",
+  "item.battleroyaleitem.armor_plate.tooltip": "高强度复合装甲，分层防护设计",
+  "item.battleroyaleitem.armor_plate.tooltip.use": "长按装备，最多可装备三块。最后一块将抵御致命伤害",
+  "item.battleroyaleitem.armor_plate.use_short": "未充分安装",
+  "item.battleroyaleitem.armor_plate.use_fail": "护甲板已满，无需填充",
 
 
 

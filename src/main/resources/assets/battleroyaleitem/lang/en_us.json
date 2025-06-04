@@ -40,10 +40,17 @@
   "item.battleroyaleitem.bio_radar.use_success": "",
   "item.battleroyaleitem.bio_radar.use_short": "",
   "item.battleroyaleitem.bio_radar.use_fail": "",
+  "item.battleroyaleitem.bio_radar.detected": "",
 
   "item.battleroyaleitem.lift_device": "",
   "item.battleroyaleitem.lift_device.tooltip": "",
   "item.battleroyaleitem.lift_device.tooltip.use": "",
+
+  "item.battleroyaleitem.armor_plate": "",
+  "item.battleroyaleitem.armor_plate.tooltip": "",
+  "item.battleroyaleitem.armor_plate.tooltip.use": "",
+  "item.battleroyaleitem.armor_plate.use_short": "",
+  "item.battleroyaleitem.armor_plate.use_fail": "",
 
 
 

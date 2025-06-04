@@ -1,6 +1,7 @@
 package net.harrison.battleroyaleitem.items.rholditem.bioRadar;
 
 import net.harrison.battleroyaleitem.items.AbsRHoldItem;
+import net.harrison.battleroyaleitem.particles.ParticleSummon;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.particles.ParticleOptions;
@@ -87,6 +88,10 @@ public class BioRadarItem extends AbsRHoldItem implements GeoItem {
             double distance = player.position().vectorTo(otherPlayer.position()).length();
             if(distance<=RANGE) {
                 otherPlayer.addEffect(new MobEffectInstance(MobEffects.GLOWING, GLOW_DURATION, 0, false, false));
+                ParticleSummon.spawnClientParticles(otherPlayer.getPosition(1.0F), ParticleTypes.ELDER_GUARDIAN, 1);
+                otherPlayer.playSound(SoundEvents.ELDER_GUARDIAN_CURSE);
+                otherPlayer.displayClientMessage(Component.translatable("item.battleroyaleitem.bio_radar.detected")
+                        .withStyle(ChatFormatting.RED), true);
                 scanned.incrementAndGet();
             }
             return false;
