@@ -16,21 +16,21 @@ public class ArmorPlateHudOverlay {
 
     public static final IGuiOverlay HUD_ARMOR_PLATE = ((gui, poseStack, partialTick, screenWidth, screenHeight) -> {
         int x = screenWidth/2;
-        int y = screenHeight;
+        int y = screenHeight/2;
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, EMPTY_ARMOR_PLATE);
         for (int i = 0; i<3; i++) {
-            GuiComponent.blit(poseStack, x - 94 + (i * 9), y - 54, 0, 0, 12, 12,
-                    12, 12);
+            GuiComponent.blit(poseStack, x + 7 + (i * 27), y + 80, 0, 0, 32, 32,
+                    32, 32);
         }
 
         RenderSystem.setShaderTexture(0, LOADED_ARMOR_PLATE);
         for (int i = 0; i<3; i++) {
             if (ClientArmorPlateData.getArmorNum() > i) {
-                GuiComponent.blit(poseStack,x - 94 + (i * 9), y-54, 0, 0, 12, 12,
-                        12, 12);
+                GuiComponent.blit(poseStack,x + 7 + (i * 27), y + 80, 0, 0, 32, 32,
+                        32, 32);
 
             } else {
                 break;

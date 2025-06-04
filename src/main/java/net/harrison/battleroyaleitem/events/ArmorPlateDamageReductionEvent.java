@@ -33,7 +33,8 @@ public class ArmorPlateDamageReductionEvent {
 
         DamageSource source = event.getSource();
 
-        if (source.is(DamageTypes.FALL)) {
+        if (source.is(DamageTypes.FALL) || source.is(DamageTypes.MAGIC) ||
+                source.is(DamageTypes.OUT_OF_WORLD)) {
             return;
         }
 
