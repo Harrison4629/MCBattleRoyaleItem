@@ -23,8 +23,8 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.LazyOptional;
 
 public class ArmorPlateItem extends AbsRHoldItem {
-    private static final int USE_DURATION = 20;
-    private static final int COOLDOWN_TICKS = 40;
+    private static final int USE_DURATION = 30;
+    private static final int COOLDOWN_TICKS = 10;
 
 
     public ArmorPlateItem(Properties properties) {
@@ -56,12 +56,8 @@ public class ArmorPlateItem extends AbsRHoldItem {
                         if (!player.isCreative()) {
                             stack.shrink(1);
                         }
-
-                        player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
-
-
                     }
-
+                    player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
                 });
             }
 
