@@ -26,7 +26,4 @@ public class KeyPressEvent {
             ModMessages.sendToServer(new StopPhasingPacket());
         }
     }
-
-
-
 }

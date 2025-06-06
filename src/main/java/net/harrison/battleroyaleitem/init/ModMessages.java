@@ -1,7 +1,6 @@
 package net.harrison.battleroyaleitem.init;
 
 import net.harrison.battleroyaleitem.Battleroyaleitem;
-import net.harrison.battleroyaleitem.networking.c2spacket.ArmorPlateC2SPacket;
 import net.harrison.battleroyaleitem.networking.c2spacket.StopPhasingPacket;
 import net.harrison.battleroyaleitem.networking.s2cpacket.ArmorPlateSyncS2CPacket;
 import net.harrison.battleroyaleitem.networking.s2cpacket.LiftDevicePacket;
@@ -41,12 +40,6 @@ public class ModMessages {
                 .decoder(StopPhasingPacket::new)
                 .encoder(StopPhasingPacket::toBytes)
                 .consumerMainThread(StopPhasingPacket::handle)
-                .add();
-
-        net.messageBuilder(ArmorPlateC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(ArmorPlateC2SPacket::new)
-                .encoder(ArmorPlateC2SPacket::toBytes)
-                .consumerMainThread(ArmorPlateC2SPacket::handle)
                 .add();
 
     }
