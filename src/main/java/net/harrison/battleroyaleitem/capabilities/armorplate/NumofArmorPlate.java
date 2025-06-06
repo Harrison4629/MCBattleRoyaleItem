@@ -25,6 +25,10 @@ public class NumofArmorPlate {
         this.numofArmorPlate = Math.max(this.numofArmorPlate - 1, 0);
     }
 
+    public void subAllArmorPlate() {
+        this.numofArmorPlate = 0;
+    }
+
     public void copyFrom(NumofArmorPlate source) {
         this.numofArmorPlate = source.numofArmorPlate;
     }

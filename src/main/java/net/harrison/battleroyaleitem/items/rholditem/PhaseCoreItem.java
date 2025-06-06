@@ -7,6 +7,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
@@ -30,6 +31,9 @@ public class PhaseCoreItem extends AbsRHoldItem {
     @Override
     protected void applyItem(Player player, Level level) {
         if (!level.isClientSide) {
+
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT,
+                    SoundSource.PLAYERS,1.0F, 1.0F);
 
             PhaseData.DATA.put(player.getUUID(), new PhaseData(player.getPosition(1.0F),
                     player.getViewVector(1.0F), TRACE_BACK_TIME));

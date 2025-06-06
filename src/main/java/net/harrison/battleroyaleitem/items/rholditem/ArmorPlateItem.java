@@ -77,7 +77,7 @@ public class ArmorPlateItem extends AbsRHoldItem {
 
     @Override
     protected SoundEvent getFinishSound() {
-        return SoundEvents.ARMOR_EQUIP_GENERIC;
+        return SoundEvents.ARMOR_EQUIP_LEATHER;
     }
 
     @Override

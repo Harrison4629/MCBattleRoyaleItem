@@ -9,9 +9,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
 public class ArmorPlateHudOverlay {
-    private static final ResourceLocation LOADED_ARMOR_PLATE = new ResourceLocation(Battleroyaleitem.MODID,
+    private static final ResourceLocation LOADED_ARMOR_PLATE = ResourceLocation.fromNamespaceAndPath(Battleroyaleitem.MODID,
             "textures/armorplate/loaded_armor_plate.png");
-    private static final ResourceLocation EMPTY_ARMOR_PLATE = new ResourceLocation(Battleroyaleitem.MODID,
+    private static final ResourceLocation EMPTY_ARMOR_PLATE = ResourceLocation.fromNamespaceAndPath(Battleroyaleitem.MODID,
             "textures/armorplate/empty_armor_plate.png");
 
     public static final IGuiOverlay HUD_ARMOR_PLATE = ((gui, poseStack, partialTick, screenWidth, screenHeight) -> {

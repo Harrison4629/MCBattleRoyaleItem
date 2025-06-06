@@ -1,7 +1,6 @@
 package net.harrison.battleroyaleitem.items.rholditem.bioRadar;
 
 import net.harrison.battleroyaleitem.items.AbsRHoldItem;
-import net.harrison.battleroyaleitem.particles.ParticleSummon;
 import net.harrison.soundmanager.init.ModMessages;
 import net.harrison.soundmanager.networking.s2cpacket.PlaySoundToClientS2CPacket;
 import net.minecraft.ChatFormatting;
@@ -12,12 +11,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -70,9 +66,14 @@ public class BioRadarItem extends AbsRHoldItem implements GeoItem {
                     otherPlayer.addEffect(new MobEffectInstance(MobEffects.GLOWING, GLOW_DURATION, 0, false, false));
                     ModMessages.sendToPlayer(new PlaySoundToClientS2CPacket(SoundEvents.ELDER_GUARDIAN_CURSE, 1.0F, 1.0F),
                             (ServerPlayer) otherPlayer);
-                    otherPlayer.displayClientMessage(Component.translatable("item.battleroyaleitem.bio_radar.detected").withStyle(ChatFormatting.RED), true);
+                    otherPlayer.displayClientMessage(Component.translatable("item.battleroyaleitem.bio_radar.detected")
+                            .withStyle(ChatFormatting.RED), true);
 
-                    level.addParticle(ParticleTypes.ELDER_GUARDIAN, otherPlayer.getX(), otherPlayer.getY(), otherPlayer.getZ(), 0.0D, 0.0D, 0.0D);
+                    //level.addParticle(ParticleTypes.ELDER_GUARDIAN
+                    //        , otherPlayer.getX() + player.getLookAngle().x
+                    //        , otherPlayer.getY() + otherPlayer.getEyeHeight() + player.getLookAngle().y
+                    //        , otherPlayer.getZ() + player.getLookAngle().z,
+                    //        0.0D, 0.0D, 0.0D);
 
                     scanned++;
                 }
