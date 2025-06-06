@@ -57,6 +57,11 @@ public class PhaseCoreItem extends AbsRHoldItem {
     }
 
     @Override
+    protected String getUseFailTranslationKey() {
+        return "";
+    }
+
+    @Override
     protected SoundEvent getFinishSound() {
         return SoundEvents.ENDERMAN_TELEPORT;
     }

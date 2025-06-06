@@ -48,6 +48,11 @@ public class RegenerationSyringeItem extends AbsRHoldItem {
     }
 
     @Override
+    protected String getUseFailTranslationKey() {
+        return "";
+    }
+
+    @Override
     protected SoundEvent getFinishSound() {
         return SoundEvents.PLAYER_HURT_SWEET_BERRY_BUSH;
     }

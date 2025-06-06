@@ -6,7 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 public class NumofArmorPlate {
     private int numofArmorPlate;
     private float ARMOR_PLATE_HP;
-    private final int MAX_ARMOR_PLATE = 3;
+    public static final int MAX_ARMOR_PLATE = 3;
     public static final float MAX_HP_PER_ARMOR_PLATE = 10;
 
     public int getNumofArmorPlate() {
@@ -17,7 +17,7 @@ public class NumofArmorPlate {
         if (this.numofArmorPlate == MAX_ARMOR_PLATE){
             this.ARMOR_PLATE_HP = MAX_HP_PER_ARMOR_PLATE;
         }
-        this.numofArmorPlate = Math.min(this.numofArmorPlate + num, this.MAX_ARMOR_PLATE);
+        this.numofArmorPlate = Math.min(this.numofArmorPlate + num, MAX_ARMOR_PLATE);
 
     }
 

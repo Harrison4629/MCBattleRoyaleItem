@@ -58,6 +58,11 @@ public class ChameleonItem extends AbsRHoldItem {
     }
 
     @Override
+    protected String getUseFailTranslationKey() {
+        return "";
+    }
+
+    @Override
     public UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.BRUSH;
     }

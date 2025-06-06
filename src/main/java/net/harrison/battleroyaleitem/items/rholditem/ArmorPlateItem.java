@@ -12,13 +12,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.LazyOptional;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ArmorPlateItem extends AbsRHoldItem {
     private static final int USE_DURATION = 30;
@@ -30,40 +31,15 @@ public class ArmorPlateItem extends AbsRHoldItem {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        if (entity instanceof Player player) {
-            if (!level.isClientSide) {
-                LazyOptional<NumofArmorPlate> armorCapability = player.getCapability(NumofArmorPlateProvider.NUMOF_ARMOR_PLATE_CAPABILITY);
-
-                armorCapability.ifPresent(numofArmorPlate -> {
-                    int armorPlateCount = numofArmorPlate.getNumofArmorPlate();
-                    float plateHP = numofArmorPlate.getHP();
-
-                    if (armorPlateCount ==3 && plateHP == NumofArmorPlate.MAX_HP_PER_ARMOR_PLATE) {
-
-                        player.displayClientMessage(Component.translatable("item.battleroyaleitem.armor_plate.use_fail")
-                                .withStyle(ChatFormatting.RED), true);
-                        level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                                SoundEvents.VILLAGER_NO, SoundSource.PLAYERS, getVolume(), getPitch());
-                    } else {
-                        applyItem(player, level);
-
-                        level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                                getFinishSound(), SoundSource.PLAYERS, getVolume(), getPitch());
-
-                        if (!player.isCreative()) {
-                            stack.shrink(1);
-                        }
-                    }
-                    player.getCooldowns().addCooldown(this, COOLDOWN_TICKS);
-                });
-            }
-
-            if (level.isClientSide) {
-                spawnParticles(player, level);
-            }
-        }
-        return stack;
+    protected boolean conditionsMet(Player player, Level level) {
+        AtomicBoolean met = new AtomicBoolean(true);
+        LazyOptional<NumofArmorPlate> armorCapability = player.getCapability(NumofArmorPlateProvider.NUMOF_ARMOR_PLATE_CAPABILITY);
+        armorCapability.ifPresent(numofArmorPlate -> {
+            int armorPlateCount = numofArmorPlate.getNumofArmorPlate();
+            float plateHP = numofArmorPlate.getHP();
+            met.set(armorPlateCount < NumofArmorPlate.MAX_ARMOR_PLATE || plateHP < NumofArmorPlate.MAX_HP_PER_ARMOR_PLATE);
+        });
+        return met.get();
     }
 
     @Override
@@ -87,6 +63,11 @@ public class ArmorPlateItem extends AbsRHoldItem {
     @Override
     protected String getUseTooltipTranslationKey() {
         return "item.battleroyaleitem.armor_plate.tooltip.use";
+    }
+
+    @Override
+    protected String getUseFailTranslationKey() {
+        return "item.battleroyaleitem.armor_plate.use_fail";
     }
 
     @Override

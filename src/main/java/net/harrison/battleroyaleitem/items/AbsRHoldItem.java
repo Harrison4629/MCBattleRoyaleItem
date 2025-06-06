@@ -1,12 +1,14 @@
 package net.harrison.battleroyaleitem.items;
 
+import net.harrison.soundmanager.init.ModMessages;
+import net.harrison.soundmanager.networking.s2cpacket.PlaySoundToClientS2CPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -57,32 +59,55 @@ public abstract class AbsRHoldItem extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         if (entity instanceof Player player) {
-            if (!level.isClientSide) {
+            if (conditionsMet(player, level)) {
+                if (!level.isClientSide) {
+                    applyItem(player, level);
+                    ModMessages.sendToPlayer(new PlaySoundToClientS2CPacket(getFinishSound(), getVolume(),
+                            getPitch()), (ServerPlayer) player);
 
-                applyItem(player, level);
-
-                level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                        getFinishSound(), SoundSource.PLAYERS, getVolume(), getPitch());
-
-                if (!player.isCreative()) {
-                    stack.shrink(1);
+                    if (!player.isCreative()) {
+                        stack.shrink(1);
+                    }
+                    player.getCooldowns().addCooldown(this, cooldownTicks);
                 }
-
-                player.getCooldowns().addCooldown(this, cooldownTicks);
-            }
-
-            if (level.isClientSide) {
-                spawnParticles(player, level);
+                if (level.isClientSide) {
+                    spawnParticles(player, level);
+                }
+            } else {
+                if (!level.isClientSide) {
+                    applyItemFailed(player, level);
+                    ModMessages.sendToPlayer(new PlaySoundToClientS2CPacket(SoundEvents.VILLAGER_NO, 1.0F,
+                            1.0F), (ServerPlayer) player);
+                    player.getCooldowns().addCooldown(this, cooldownTicks);
+                }
+                if (level.isClientSide) {
+                    spawnFailedParticles(player, level);
+                }
             }
         }
         return stack;
     }
 
+
+
+
+
+    protected boolean conditionsMet(Player player, Level level) {
+        return true;
+    }
+
     protected abstract void applyItem(Player player, Level level);
+
+    protected void applyItemFailed(Player player, Level level) {
+        player.displayClientMessage(Component.translatable(getUseFailTranslationKey())
+                .withStyle(ChatFormatting.RED), true);
+    }
 
     protected abstract String getUseTooShortTranslationKey();
     protected abstract String getTooltipTranslationKey();
     protected abstract String getUseTooltipTranslationKey();
+    protected abstract String getUseFailTranslationKey();
+
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
@@ -132,6 +157,23 @@ public abstract class AbsRHoldItem extends Item {
 
             level.addParticle(
                     getParticleType(),
+                    position.x + xOffset,
+                    position.y + yOffset,
+                    position.z + zOffset,
+                    0, 0.1, 0
+            );
+        }
+    }
+
+    protected void spawnFailedParticles(Player player, Level level) {
+        Vec3 position = player.position();
+        for (int i = 0; i <16; i++) {
+            double xOffset = (level.random.nextDouble() - 0.5) * 1.5;
+            double yOffset = level.random.nextDouble() * 2.0;
+            double zOffset = (level.random.nextDouble() - 0.5) * 1.5;
+
+            level.addParticle(
+                    ParticleTypes.ANGRY_VILLAGER,
                     position.x + xOffset,
                     position.y + yOffset,
                     position.z + zOffset,
