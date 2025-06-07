@@ -66,7 +66,7 @@ public class LiftDeviceEntity extends Entity {
                     Vec3 delta = new Vec3(1.9 * speed.x, 1.2, 1.9 * speed.z);
                     player.setDeltaMovement(delta);
                     ModMessages.sendToPlayer(new LiftDevicePacket(delta), player);
-                    LiftDeviceFallImmuneEvent.setImmune(player.getUUID(), true);
+                    LiftDeviceFallImmuneEvent.setImmune(player.getUUID());
                 }
             }
         }

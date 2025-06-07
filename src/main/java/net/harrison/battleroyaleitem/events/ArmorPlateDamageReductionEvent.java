@@ -38,7 +38,8 @@ public class ArmorPlateDamageReductionEvent {
             return;
         }
 
-        LazyOptional<NumofArmorPlate> armorCapability = player.getCapability(NumofArmorPlateProvider.NUMOF_ARMOR_PLATE_CAPABILITY);
+        LazyOptional<NumofArmorPlate> armorCapability = player.getCapability(
+                NumofArmorPlateProvider.NUMOF_ARMOR_PLATE_CAPABILITY);
 
         armorCapability.ifPresent(numofArmorPlate -> {
             int armorPlateCount = numofArmorPlate.getNumofArmorPlate();

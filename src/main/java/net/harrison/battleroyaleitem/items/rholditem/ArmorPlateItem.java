@@ -89,4 +89,9 @@ public class ArmorPlateItem extends AbsRHoldItem {
     protected ParticleOptions getParticleType() {
         return ParticleTypes.ELECTRIC_SPARK;
     }
+
+    @Override
+    public float getVolume() {
+        return 1.5F;
+    }
 }
