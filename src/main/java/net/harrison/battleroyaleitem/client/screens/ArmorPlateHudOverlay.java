@@ -3,6 +3,7 @@ package net.harrison.battleroyaleitem.client.screens;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.harrison.battleroyaleitem.Battleroyaleitem;
 import net.harrison.battleroyaleitem.client.ClientArmorPlateData;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +16,12 @@ public class ArmorPlateHudOverlay {
             "textures/armorplate/empty_armor_plate.png");
 
     public static final IGuiOverlay HUD_ARMOR_PLATE = ((gui, poseStack, partialTick, screenWidth, screenHeight) -> {
+        Minecraft minecraft = Minecraft.getInstance();
+
+        if (minecraft.player != null && (minecraft.player.isCreative() || minecraft.player.isSpectator())) {
+            return;
+        }
+
         int x = screenWidth/2;
         int y = screenHeight;
 
